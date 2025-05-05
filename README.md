@@ -129,7 +129,7 @@ Visit `http://localhost:3000`
 ## 💖 Built with Lovable
 
 This project was designed in collaboration with [**Lovable**](https://lovable.dev), a creative platform that empowers makers to build elegant and meaningful web applications.  
-Lovable’s calm-first design philosophy inspired the layout, flow, and user experience of *TaskFlow*, helping shape a task management tool that's not just functional—but delightful to use.
+Lovable’s calm-first design philosophy inspired the layout, flow, and user experience of *TaskFlow*, helping shape a task management tool that's not just functional—but delightful to use. 
 
 
 ## Contact
