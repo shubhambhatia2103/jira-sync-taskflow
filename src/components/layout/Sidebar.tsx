@@ -28,10 +28,10 @@ export const Sidebar = () => {
         <div className="h-16 flex items-center justify-between px-4 border-b border-sidebar-border">
           <div className={cn("flex items-center", collapsed ? "justify-center" : "")}>
             {!collapsed && (
-              <span className="font-bold text-xl text-sidebar-primary">JiraSyncFlow</span>
+              <span className="font-bold text-xl text-sidebar-primary">TaskFlow</span>
             )}
             {collapsed && (
-              <span className="font-bold text-xl text-sidebar-primary">JS</span>
+              <span className="font-bold text-xl text-sidebar-primary">TF</span>
             )}
           </div>
           <Button

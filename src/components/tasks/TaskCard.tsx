@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Task } from '@/types/task';
 import { cn } from '@/lib/utils';
 import { Card, CardContent } from '@/components/ui/card';
@@ -12,6 +13,8 @@ interface TaskCardProps {
 }
 
 const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
+  const navigate = useNavigate();
+  
   const getStatusClass = () => {
     return `task-status-${task.status.toLowerCase().replace(' ', '-')}`;
   };
@@ -24,8 +27,12 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
       .toUpperCase();
   };
 
+  const handleClick = () => {
+    navigate(`/tasks/${task.id}`);
+  };
+
   return (
-    <Card className="hover:shadow-md transition-shadow">
+    <Card className="hover:shadow-md transition-shadow cursor-pointer" onClick={handleClick}>
       <CardContent className="p-4">
         <div className="flex items-start justify-between gap-4">
           <div className="flex items-center gap-3">
