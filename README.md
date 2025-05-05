@@ -72,21 +72,6 @@ This project is built with:
 
 ---
 
-## 📦 Project Structure
-
-```
-taskflow/
-├── components/         # UI Components
-├── pages/              # Next.js Pages (Home, Tasks, Bugs, Settings)
-├── utils/              # API utils and helpers
-├── styles/             # Tailwind and global styles
-├── lib/                # Supabase and Jira API logic
-├── public/             # Static assets
-├── .env.local          # Environment variables
-└── README.md
-```
-
----
 
 ## ⚙️ Installation & Setup
 
