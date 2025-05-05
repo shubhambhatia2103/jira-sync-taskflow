@@ -10,6 +10,8 @@ import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 import MainLayout from "./components/layout/MainLayout";
 import TaskDetail from "./pages/TaskDetail";
+import TasksPage from "./pages/TasksPage";
+import BugsPage from "./pages/BugsPage";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +32,22 @@ const App = () => {
               isAuthenticated ? 
               <MainLayout>
                 <Dashboard />
+              </MainLayout> : 
+              <Navigate to="/login" replace />
+            } />
+            
+            <Route path="/tasks" element={
+              isAuthenticated ? 
+              <MainLayout>
+                <TasksPage />
+              </MainLayout> : 
+              <Navigate to="/login" replace />
+            } />
+            
+            <Route path="/bugs" element={
+              isAuthenticated ? 
+              <MainLayout>
+                <BugsPage />
               </MainLayout> : 
               <Navigate to="/login" replace />
             } />
