@@ -60,16 +60,15 @@ TaskFlow was built to help teams manage tasks and bugs in one unified platform, 
 
 ---
 
-## 🧰 Tech Stack
+## 🛠️ Technologies Used
 
-| Layer       | Technology       |
-|-------------|------------------|
-| **Frontend** | React (Next.js)  |
-| **Styling**  | Tailwind CSS     |
-| **Backend**  | Supabase (DB, Auth, Storage) |
-| **Integration** | Jira REST API |
-| **Icons**    | Lucide Icons     |
-| **State**    | React Context (Zustand optional) |
+This project is built with:
+
+- ⚡ **Vite** – Fast frontend build tool for modern web projects  
+- 🟦 **TypeScript** – Typed superset of JavaScript for scalable development  
+- ⚛️ **React** – JavaScript library for building user interfaces  
+- 🎨 **Tailwind CSS** – Utility-first CSS framework for rapid UI development  
+- 🧩 **shadcn/ui** – Beautifully designed, accessible components built on top of Radix UI
 
 ---
 
@@ -93,8 +92,8 @@ taskflow/
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/taskflow.git
-cd taskflow
+git clone https://github.com/shubhambhatia2103/jira-sync-taskflow.git
+cd jira-sync-taskflow
 ```
 
 ### 2. Install Dependencies
@@ -127,12 +126,6 @@ Visit `http://localhost:3000`
 
 ---
 
-## 📷 Screenshots (Optional)
-
-> *Include images of the Dashboard, Task Detail View, Jira Setup Page*
-
----
-
 ## 🚀 Roadmap
 
 - [x] Task/Bug dashboard with filters
@@ -146,32 +139,14 @@ Visit `http://localhost:3000`
 
 ---
 
-## 🛡️ License
+## 💖 Built with Loveable
 
-This project is licensed under the [MIT License](LICENSE).
+This project was designed in collaboration with [**Lovable**](https://lovable.dev), a creative platform that helps makers build beautiful and thoughtful web experiences.  
+Their calm-first design philosophy inspired the look, feel, and flow of *Tiny Wins*.
 
----
 
-## 🤝 Contribution Guidelines
+## Contact
 
-1. Fork the repository  
-2. Create a new branch (`feat/your-feature`)  
-3. Commit your changes  
-4. Open a Pull Request  
+[<img target="_blank" src="https://img.icons8.com/bubbles/100/000000/linkedin.png" title="LinkedIn">](https://www.linkedin.com/in/shubhambhatia2103/) [<img target="_blank" src="https://img.icons8.com/bubbles/100/000000/github.png" title="Github">](https://github.com/shubhambhatia2103) [<img target="_blank" src="https://img.icons8.com/bubbles/100/000000/instagram-new.png" title="Instagram">](https://instagram.com/6eingshubham) [<img target="_blank" src="https://img.icons8.com/bubbles/100/000000/twitter-squared.png" title="Twitter">](https://x.com/apmshubham)
 
----
-
-## 💬 Feedback & Support
-
-For feedback, issues, or feature requests, feel free to open an issue or contact me on [Twitter](https://twitter.com/your_handle) or [LinkedIn](https://www.linkedin.com/in/your_profile).
-
----
-
-## 🙋‍♂️ Author
-
-**Shubham Bhatia**  
-Cloud & Data Engineer | Product Enthusiast  
-📍 New Delhi, India  
-📧 shubhambhatia0321@gmail.com  
-🌐 [GitHub](https://github.com/shubhambhatia00) | [LinkedIn](https://www.linkedin.com/in/shubhambhatia0321)
 
