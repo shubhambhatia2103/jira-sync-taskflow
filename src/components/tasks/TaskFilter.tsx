@@ -37,7 +37,7 @@ const TaskFilter: React.FC<TaskFilterProps> = ({ onFilterChange }) => {
               key={filter.id}
               variant="outline"
               className={cn(
-                "cursor-pointer py-1.5 text-sm", 
+                "cursor-pointer py-1.5 text-sm transition-all", 
                 activeFilters.includes(filter.id) 
                   ? filter.color
                   : "hover:bg-secondary"
@@ -50,7 +50,7 @@ const TaskFilter: React.FC<TaskFilterProps> = ({ onFilterChange }) => {
           {activeFilters.length > 0 && (
             <Badge 
               variant="outline" 
-              className="cursor-pointer py-1.5 text-sm hover:bg-secondary"
+              className="cursor-pointer py-1.5 text-sm hover:bg-secondary transition-all"
               onClick={() => {
                 setActiveFilters([]);
                 onFilterChange([]);
