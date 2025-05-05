@@ -12,6 +12,9 @@ import MainLayout from "./components/layout/MainLayout";
 import TaskDetail from "./pages/TaskDetail";
 import TasksPage from "./pages/TasksPage";
 import BugsPage from "./pages/BugsPage";
+import ProjectsPage from "./pages/ProjectsPage";
+import ProjectDetail from "./pages/ProjectDetail";
+import ReportsPage from "./pages/ReportsPage";
 
 const queryClient = new QueryClient();
 
@@ -56,6 +59,30 @@ const App = () => {
               isAuthenticated ? 
               <MainLayout>
                 <TaskDetail />
+              </MainLayout> : 
+              <Navigate to="/login" replace />
+            } />
+            
+            <Route path="/projects" element={
+              isAuthenticated ? 
+              <MainLayout>
+                <ProjectsPage />
+              </MainLayout> : 
+              <Navigate to="/login" replace />
+            } />
+            
+            <Route path="/projects/:id" element={
+              isAuthenticated ? 
+              <MainLayout>
+                <ProjectDetail />
+              </MainLayout> : 
+              <Navigate to="/login" replace />
+            } />
+            
+            <Route path="/reports" element={
+              isAuthenticated ? 
+              <MainLayout>
+                <ReportsPage />
               </MainLayout> : 
               <Navigate to="/login" replace />
             } />

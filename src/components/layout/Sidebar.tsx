@@ -7,7 +7,9 @@ import {
   CheckSquare, 
   Bug, 
   ChevronLeft, 
-  ChevronRight 
+  ChevronRight, 
+  Folder,
+  FileChartPie
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { 
@@ -27,6 +29,8 @@ export const Sidebar = () => {
     { name: 'Dashboard', path: '/', icon: Home },
     { name: 'Tasks', path: '/tasks', icon: CheckSquare },
     { name: 'Bugs', path: '/bugs', icon: Bug },
+    { name: 'Projects', path: '/projects', icon: Folder },
+    { name: 'Reports', path: '/reports', icon: FileChartPie },
     { name: 'Settings', path: '/settings', icon: Settings },
   ];
 
@@ -74,7 +78,9 @@ export const Sidebar = () => {
                       collapsed 
                         ? "justify-center rounded-full p-3 mx-auto hover:bg-sidebar-accent/40"
                         : "px-3 py-2 rounded-md hover:bg-sidebar-accent/20",
-                      currentPath === item.path
+                      currentPath === item.path || (
+                        item.path !== '/' && currentPath.startsWith(item.path)
+                      )
                         ? collapsed 
                           ? "bg-sidebar-accent text-sidebar-accent-foreground shadow-md" 
                           : "bg-sidebar-accent/80 text-sidebar-accent-foreground font-medium"
