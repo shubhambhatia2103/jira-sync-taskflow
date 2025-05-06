@@ -76,7 +76,14 @@ This project is built with:
 - 🧩 **shadcn/ui** – Beautifully designed, accessible components built on top of Radix UI
 
 ---
+## 📊 Reports & Time Tracker
 
+- Log Weekly Hours on a grid interface
+- Pie Charts for time distribution across projects
+- Trend Analysis: Weekly/Monthly time trends with CSV export
+- Export Support: PDF, DOC, and CSV formats
+
+---
 
 ## ⚙️ Installation & Setup
 
