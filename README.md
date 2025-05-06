@@ -51,6 +51,14 @@ TaskFlow was built to help teams manage tasks and bugs in one unified platform, 
   - Rich-text description editing
   - File attachments
   - Real-time activity feed (comments, changes)
+ 
+### 📊 Reports & Time Tracker
+
+- Log Weekly Hours on a grid interface
+- Pie Charts for time distribution across projects
+- Trend Analysis: Weekly/Monthly time trends with CSV export
+- Export Support: PDF, DOC, and CSV formats
+
 
 ### 🔧 Jira Integration
 - Settings page allows linking Jira workspace
@@ -75,13 +83,6 @@ This project is built with:
 - 🎨 **Tailwind CSS** – Utility-first CSS framework for rapid UI development  
 - 🧩 **shadcn/ui** – Beautifully designed, accessible components built on top of Radix UI
 
----
-## 📊 Reports & Time Tracker
-
-- Log Weekly Hours on a grid interface
-- Pie Charts for time distribution across projects
-- Trend Analysis: Weekly/Monthly time trends with CSV export
-- Export Support: PDF, DOC, and CSV formats
 
 ---
 
