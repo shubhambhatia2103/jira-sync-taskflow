@@ -37,10 +37,11 @@ TaskFlow was built to help teams manage tasks and bugs in one unified platform, 
 /settings    → Jira & App Settings
 ```
 
-### 📋 Tasks & Bugs View
-- All assigned items displayed upon clicking “Tasks” or “Bugs”
-- Mimics Home page behavior with real-time display
-- Card-based layout with filters (status, priority, assignee)
+### 📋 Tasks & Bugs Tracking
+- Create and manage tasks and bugs in separate views.
+- Assign tasks and bugs to different team members with varying levels of priority.
+- Track the progress of tasks and bugs with customizable labels and statuses.
+- Set deadlines and milestones to ensure tasks are completed on time.
 
 ### 📄 Task Detail Page
 - Click on any task/bug card to view and edit full details:
@@ -52,24 +53,24 @@ TaskFlow was built to help teams manage tasks and bugs in one unified platform, 
   - File attachments
   - Real-time activity feed (comments, changes)
  
-### 📊 Reports & Time Tracker
-
-- Log Weekly Hours on a grid interface
-- Pie Charts for time distribution across projects
-- Trend Analysis: Weekly/Monthly time trends with CSV export
-- Export Support: PDF, DOC, and CSV formats
-
 
 ### 🔧 Jira Integration
-- Settings page allows linking Jira workspace
-- Syncs tasks and bugs from selected Jira boards
-- Uses Jira REST API under the hood
+- **Sync with Jira**: Connect TaskFlow with your Jira workspace to streamline task and bug management.
+- **Real-Time Updates**: Keep all your Jira tasks and bugs synced automatically with TaskFlow.
+
+### 🧩 Projects & Team Collaboration
+- **Organize Tasks by Projects**: Group related tasks and bugs into specific projects.
+- **Assign Teams**: Collaborate with your team by assigning specific tasks to team members and monitoring their progress.
+
+### ⚡ Time Tracking & Reports
+- **Track Time**: Log your time against tasks and bugs directly within the platform.
+- **Generate Reports**: View and export time reports, such as weekly hours worked, project time allocation, and individual contributor reports.
+- **Charts & Analytics**: Visualize your time data using pie charts and trend analysis.
 
 ### 🎨 Design System
-- Color palette: Professional blues & purples with status-based accents
-- Typography: Clean, accessible fonts
-- Layout: Responsive grid and card UI
-- Interactions: Smooth transitions and hover states
+- Designed with **TailwindCSS** for a clean and modern look.
+- Features **shadcn/ui** and **Radix UI** for an accessible and smooth user experience.
+- Fully responsive for use on desktop and mobile devices.
 
 ---
 
@@ -85,6 +86,21 @@ This project is built with:
 
 
 ---
+
+## 📐 Project Structure
+Here's a high-level breakdown of the project's structure:
+
+```bash
+src/
+├── components/       # Reusable UI components (Buttons, Cards, etc.)
+├── pages/            # Page components for Task, Bug, Projects, Reports, etc.
+├── layout/           # Layout components including Sidebar, Header
+├── data/             # Mock data files for tasks, bugs, projects
+├── utils/            # Helper functions for time tracking, reporting, etc.
+├── hooks/            # Custom hooks (e.g., useTasks, useTimeTracking)
+└── App.tsx           # Main app entry point and routing
+
+```
 
 ## ⚙️ Installation & Setup
 
