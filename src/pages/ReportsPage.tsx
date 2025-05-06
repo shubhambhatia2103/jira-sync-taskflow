@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import TimeTracker from '@/components/reports/TimeTracker';
 import ProjectReports from '@/components/reports/ProjectReports';
+import TimeTrends from '@/components/reports/TimeTrends';
 
 const ReportsPage = () => {
   const [activeTab, setActiveTab] = useState('time-tracker');
@@ -18,12 +19,16 @@ const ReportsPage = () => {
         <TabsList className="mb-6">
           <TabsTrigger value="time-tracker">Time Tracker</TabsTrigger>
           <TabsTrigger value="reports">Reports</TabsTrigger>
+          <TabsTrigger value="trends">Trends</TabsTrigger>
         </TabsList>
         <TabsContent value="time-tracker" className="p-0 border-none">
           <TimeTracker />
         </TabsContent>
         <TabsContent value="reports" className="p-0 border-none">
           <ProjectReports />
+        </TabsContent>
+        <TabsContent value="trends" className="p-0 border-none">
+          <TimeTrends />
         </TabsContent>
       </Tabs>
     </div>

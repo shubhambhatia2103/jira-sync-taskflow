@@ -14,3 +14,15 @@ export interface ProjectTime {
   percentage?: number;
   color?: string;
 }
+
+export interface TrendData {
+  period: string;
+  [projectId: string]: string | number;
+}
+
+export interface ProjectTrend {
+  projectId: string;
+  projectName: string;
+  color: string;
+  data: number[];
+}
