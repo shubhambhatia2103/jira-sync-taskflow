@@ -25,14 +25,17 @@ TaskFlow was built to help teams manage tasks and bugs in one unified platform, 
 - Simplified for MVP version
 - Built using Supabase Auth
 
-### 🧭 Sidebar Navigation
-- Left-hand sidebar with easy access to:
-  - Home
-  - Tasks
-  - Bugs
-  - Projects
-  - Reports
-  - Settings
+### 🧭 Navigation
+
+```bash
+/            → Dashboard  
+/tasks       → All Tasks  
+/bugs        → All Bugs  
+/projects    → Projects List  
+/projects/:id → Project Detail  
+/reports     → Time Tracking & Reports  
+/settings    → Jira & App Settings
+```
 
 ### 📋 Tasks & Bugs View
 - All assigned items displayed upon clicking “Tasks” or “Bugs”
