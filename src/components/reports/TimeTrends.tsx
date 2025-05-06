@@ -1,6 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
@@ -16,7 +15,7 @@ import {
   AreaChart,
   Area
 } from 'recharts';
-import { TrendUp, Calendar, Download } from 'lucide-react';
+import { TrendingUp, Calendar, Download } from 'lucide-react';
 import { TimeRange, TimeEntry, ProjectTrend, TrendData } from '@/types/reports';
 import { format, subMonths, subWeeks, eachWeekOfInterval, eachMonthOfInterval, startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns';
 import { toast } from "@/hooks/use-toast";
@@ -147,7 +146,7 @@ const TimeTrends: React.FC = () => {
         <CardHeader className="flex flex-row items-center justify-between">
           <div>
             <CardTitle className="flex items-center">
-              <TrendUp className="mr-2 h-5 w-5 text-primary" />
+              <TrendingUp className="mr-2 h-5 w-5 text-primary" />
               Time Allocation Trends
             </CardTitle>
             <CardDescription>
