@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Card, 
   CardContent, 
@@ -37,6 +37,9 @@ const projects = [
   { id: 'proj-4', name: 'Analytics Dashboard', color: '#ff8042' },
 ];
 
+// Storage key for time entries
+const TIME_ENTRIES_STORAGE_KEY = 'timeEntries';
+
 const TimeTracker: React.FC = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [timeEntries, setTimeEntries] = useState<Record<string, Record<string, string>>>({});
@@ -47,6 +50,19 @@ const TimeTracker: React.FC = () => {
   
   // Get array of days in current week
   const weekDays = eachDayOfInterval({ start: weekStart, end: weekEnd });
+  
+  // Load saved time entries from localStorage on component mount
+  useEffect(() => {
+    const savedTimeEntries = localStorage.getItem(TIME_ENTRIES_STORAGE_KEY);
+    if (savedTimeEntries) {
+      try {
+        const parsedEntries = JSON.parse(savedTimeEntries);
+        setTimeEntries(parsedEntries);
+      } catch (error) {
+        console.error('Error parsing saved time entries:', error);
+      }
+    }
+  }, []);
 
   // Handle week navigation
   const previousWeek = () => setCurrentDate(subWeeks(currentDate, 1));
@@ -68,7 +84,27 @@ const TimeTracker: React.FC = () => {
 
   // Handle save timesheet
   const handleSaveTimesheet = () => {
-    // In a real app, this would send data to a backend
+    // Save to localStorage
+    localStorage.setItem(TIME_ENTRIES_STORAGE_KEY, JSON.stringify(timeEntries));
+    
+    // Convert and save in a format that can be easily used by the Reports component
+    const formattedEntries: TimeEntry[] = [];
+    
+    Object.entries(timeEntries).forEach(([projectId, dates]) => {
+      Object.entries(dates).forEach(([date, hoursStr]) => {
+        const hours = parseFloat(hoursStr);
+        if (!isNaN(hours) && hours > 0) {
+          formattedEntries.push({
+            projectId,
+            date,
+            hours
+          });
+        }
+      });
+    });
+    
+    localStorage.setItem('formattedTimeEntries', JSON.stringify(formattedEntries));
+    
     toast({
       title: "Timesheet Saved",
       description: `Your time entries for ${weekRangeDisplay} have been saved.`,

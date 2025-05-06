@@ -1,39 +1,89 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { TimeRange, ProjectTime } from '@/types/reports';
+import { TimeRange, ProjectTime, TimeEntry } from '@/types/reports';
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
 import { FileChartPie, Download, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { toast } from "@/hooks/use-toast";
 
-// Mock time data for projects
-const projectTimeData = [
-  { id: 'proj-1', name: 'Website Redesign', hours: 42, color: '#8884d8' },
-  { id: 'proj-2', name: 'Mobile App Development', hours: 28, color: '#82ca9d' },
-  { id: 'proj-3', name: 'API Integration', hours: 15, color: '#ffc658' },
-  { id: 'proj-4', name: 'Analytics Dashboard', hours: 23, color: '#ff8042' },
+// Import the same project data used in TimeTracker
+const projects = [
+  { id: 'proj-1', name: 'Website Redesign', color: '#8884d8' },
+  { id: 'proj-2', name: 'Mobile App Development', color: '#82ca9d' },
+  { id: 'proj-3', name: 'API Integration', color: '#ffc658' },
+  { id: 'proj-4', name: 'Analytics Dashboard', color: '#ff8042' },
 ];
 
 const ProjectReports: React.FC = () => {
   const [timeRange, setTimeRange] = useState<TimeRange>('week');
   const [exportType, setExportType] = useState<'pdf' | 'doc'>('pdf');
+  const [projectTimeData, setProjectTimeData] = useState<ProjectTime[]>([]);
+  const [totalHours, setTotalHours] = useState(0);
 
-  // Calculate total hours
-  const totalHours = projectTimeData.reduce((sum, project) => sum + project.hours, 0);
-
-  // Chart data formatting for recharts with percentages
-  const chartData = projectTimeData.map(project => {
-    const percentage = (project.hours / totalHours) * 100;
-    return {
-      name: project.name,
-      value: project.hours,
-      percentage: percentage.toFixed(1),
-      color: project.color
+  // Load and process time entries from localStorage
+  useEffect(() => {
+    const loadTimeEntries = () => {
+      try {
+        const savedEntries = localStorage.getItem('formattedTimeEntries');
+        
+        if (savedEntries) {
+          const timeEntries: TimeEntry[] = JSON.parse(savedEntries);
+          
+          // Process entries to get summary by project
+          const projectSummary: Record<string, number> = {};
+          
+          timeEntries.forEach(entry => {
+            if (!projectSummary[entry.projectId]) {
+              projectSummary[entry.projectId] = 0;
+            }
+            projectSummary[entry.projectId] += entry.hours;
+          });
+          
+          // Calculate total hours
+          const total = Object.values(projectSummary).reduce((sum, hours) => sum + hours, 0);
+          setTotalHours(total);
+          
+          // Format data for chart and table
+          const formattedData: ProjectTime[] = projects.map(project => {
+            const hours = projectSummary[project.id] || 0;
+            const percentage = total > 0 ? (hours / total) * 100 : 0;
+            
+            return {
+              projectId: project.id,
+              projectName: project.name,
+              hours,
+              percentage,
+              color: project.color
+            };
+          }).filter(project => project.hours > 0);
+          
+          setProjectTimeData(formattedData);
+        } else {
+          // If no saved data, use empty array
+          setProjectTimeData([]);
+          setTotalHours(0);
+        }
+      } catch (error) {
+        console.error('Error loading time entries:', error);
+        setProjectTimeData([]);
+        setTotalHours(0);
+      }
     };
-  });
+    
+    // Load entries initially and whenever timeRange changes
+    loadTimeEntries();
+  }, [timeRange]);
+
+  // Format chart data for recharts
+  const chartData = projectTimeData.map(project => ({
+    name: project.projectName,
+    value: project.hours,
+    percentage: project.percentage?.toFixed(1),
+    color: project.color
+  }));
 
   // Handle export report
   const handleExport = (type: 'pdf' | 'doc') => {
@@ -67,32 +117,43 @@ const ProjectReports: React.FC = () => {
           </div>
         </CardHeader>
         <CardContent>
-          <div className="h-[350px] w-full">
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={chartData}
-                  cx="50%"
-                  cy="50%"
-                  outerRadius={120}
-                  innerRadius={60}
-                  fill="#8884d8"
-                  dataKey="value"
-                  label={({ name, percentage }) => `${name}: ${percentage}%`}
-                >
-                  {chartData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
-                </Pie>
-                <Tooltip 
-                  formatter={(value, name) => [`${value} hours (${chartData.find(item => item.name === name)?.percentage}%)`, 'Time Spent']} 
-                />
-                <Legend />
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
+          {projectTimeData.length > 0 ? (
+            <div className="h-[350px] w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={chartData}
+                    cx="50%"
+                    cy="50%"
+                    outerRadius={120}
+                    innerRadius={60}
+                    fill="#8884d8"
+                    dataKey="value"
+                    label={({ name, percentage }) => `${name}: ${percentage}%`}
+                  >
+                    {chartData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Pie>
+                  <Tooltip 
+                    formatter={(value, name) => [
+                      `${value} hours (${chartData.find(item => item.name === name)?.percentage}%)`,
+                      'Time Spent'
+                    ]} 
+                  />
+                  <Legend />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+          ) : (
+            <div className="h-[350px] w-full flex items-center justify-center">
+              <p className="text-muted-foreground">
+                No time entries found. Please add entries in the Time Tracker.
+              </p>
+            </div>
+          )}
           <div className="text-center mt-4">
-            <p className="text-lg font-medium">Total Logged Hours: <span className="font-bold">{totalHours}</span></p>
+            <p className="text-lg font-medium">Total Logged Hours: <span className="font-bold">{totalHours.toFixed(1)}</span></p>
           </div>
         </CardContent>
         <CardFooter className="flex justify-end space-x-2">
@@ -115,39 +176,43 @@ const ProjectReports: React.FC = () => {
           <div className="space-y-6">
             <div>
               <h3 className="text-lg font-medium mb-2">Total Hours</h3>
-              <p className="text-3xl font-bold">{totalHours} hours</p>
+              <p className="text-3xl font-bold">{totalHours.toFixed(1)} hours</p>
             </div>
             
             <div>
               <h3 className="text-lg font-medium mb-2">Projects Breakdown</h3>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Project</TableHead>
-                    <TableHead className="text-right">Hours</TableHead>
-                    <TableHead className="text-right">%</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {chartData.map((project, index) => (
-                    <TableRow key={index}>
-                      <TableCell>
-                        <div className="flex items-center">
-                          <div 
-                            className="w-3 h-3 rounded-full mr-2" 
-                            style={{ backgroundColor: project.color }} 
-                          />
-                          <span>{project.name}</span>
-                        </div>
-                      </TableCell>
-                      <TableCell className="text-right font-medium">{project.value}h</TableCell>
-                      <TableCell className="text-right text-muted-foreground">
-                        {project.percentage}%
-                      </TableCell>
+              {projectTimeData.length > 0 ? (
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Project</TableHead>
+                      <TableHead className="text-right">Hours</TableHead>
+                      <TableHead className="text-right">%</TableHead>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+                  </TableHeader>
+                  <TableBody>
+                    {projectTimeData.map((project) => (
+                      <TableRow key={project.projectId}>
+                        <TableCell>
+                          <div className="flex items-center">
+                            <div 
+                              className="w-3 h-3 rounded-full mr-2" 
+                              style={{ backgroundColor: project.color }} 
+                            />
+                            <span>{project.projectName}</span>
+                          </div>
+                        </TableCell>
+                        <TableCell className="text-right font-medium">{project.hours.toFixed(1)}h</TableCell>
+                        <TableCell className="text-right text-muted-foreground">
+                          {project.percentage?.toFixed(1)}%
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              ) : (
+                <p className="text-muted-foreground">No project data available.</p>
+              )}
             </div>
           </div>
         </CardContent>
