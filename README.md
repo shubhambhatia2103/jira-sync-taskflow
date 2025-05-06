@@ -1,6 +1,8 @@
 # 🧩 TaskFlow – Task & Bug Management with Jira Integration
 
-TaskFlow is a modern, Jira-integrated task and bug management application tailored for teams looking to streamline their workflow with a clean interface and powerful functionality. Inspired by tools like **Linear**, **ClickUp**, and **Monday.com**, TaskFlow offers a professional experience with deep customization and intuitive navigation.
+**TaskFlow** is a modern, Jira-integrated task and bug management app built to streamline team workflows with a clean interface, real-time updates, and Jira connectivity. Inspired by tools like **Linear**, **ClickUp**, and **Monday.com**, TaskFlow balances simplicity with power—perfect for agile teams.
+
+> ✅ Originally built for internal use to extend Jira’s capabilities and streamline our team workflow.
 
 ---
 
@@ -8,13 +10,11 @@ TaskFlow is a modern, Jira-integrated task and bug management application tailor
 
 TaskFlow was built to help teams manage tasks and bugs in one unified platform, fully integrated with Jira. It provides:
 
-- A responsive dashboard  
-- Task and bug detail views  
-- Simplified Jira integration  
-- A clean UI and productive UX  
-- Built-in authentication and filtering  
-
-> ✅ This project was created for internal use by my team, to manage our workflow more effectively on top of Jira’s capabilities.
+- Manage tasks and bugs from a unified, Jira-synced dashboard  
+- View detailed task/bug cards with rich metadata and activity history  
+- Filter, assign, and update statuses quickly  
+- Integrate seamlessly with Jira using its REST API  
+- Navigate via a responsive, sidebar-driven layout  
 
 ---
 
@@ -30,6 +30,8 @@ TaskFlow was built to help teams manage tasks and bugs in one unified platform, 
   - Home
   - Tasks
   - Bugs
+  - Projects
+  - Reports
   - Settings
 
 ### 📋 Tasks & Bugs View
