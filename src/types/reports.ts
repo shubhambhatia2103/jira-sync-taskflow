@@ -12,4 +12,5 @@ export interface ProjectTime {
   projectName: string;
   hours: number;
   percentage?: number;
+  color?: string;
 }

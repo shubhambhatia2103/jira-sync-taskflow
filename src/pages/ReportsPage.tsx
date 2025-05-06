@@ -14,15 +14,15 @@ const ReportsPage = () => {
         <p className="text-muted-foreground mt-1">Track time and analyze project metrics</p>
       </div>
 
-      <Tabs defaultValue="time-tracker" value={activeTab} onValueChange={setActiveTab}>
+      <Tabs defaultValue="time-tracker" value={activeTab} onValueChange={setActiveTab} className="space-y-4">
         <TabsList className="mb-6">
           <TabsTrigger value="time-tracker">Time Tracker</TabsTrigger>
           <TabsTrigger value="reports">Reports</TabsTrigger>
         </TabsList>
-        <TabsContent value="time-tracker">
+        <TabsContent value="time-tracker" className="p-0 border-none">
           <TimeTracker />
         </TabsContent>
-        <TabsContent value="reports">
+        <TabsContent value="reports" className="p-0 border-none">
           <ProjectReports />
         </TabsContent>
       </Tabs>

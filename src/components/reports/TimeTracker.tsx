@@ -4,7 +4,8 @@ import {
   Card, 
   CardContent, 
   CardHeader, 
-  CardTitle 
+  CardTitle,
+  CardFooter
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -24,14 +25,16 @@ import {
   TableRow 
 } from '@/components/ui/table';
 import { format, addDays, startOfWeek, endOfWeek, eachDayOfInterval, subWeeks, addWeeks } from 'date-fns';
-import { ChevronLeft, ChevronRight, Calendar } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Calendar, Save } from 'lucide-react';
+import { toast } from "@/hooks/use-toast";
+import { TimeEntry } from '@/types/reports';
 
 // Mock projects for the time tracker
 const projects = [
-  { id: 'proj-1', name: 'Website Redesign' },
-  { id: 'proj-2', name: 'Mobile App Development' },
-  { id: 'proj-3', name: 'API Integration' },
-  { id: 'proj-4', name: 'Analytics Dashboard' },
+  { id: 'proj-1', name: 'Website Redesign', color: '#8884d8' },
+  { id: 'proj-2', name: 'Mobile App Development', color: '#82ca9d' },
+  { id: 'proj-3', name: 'API Integration', color: '#ffc658' },
+  { id: 'proj-4', name: 'Analytics Dashboard', color: '#ff8042' },
 ];
 
 const TimeTracker: React.FC = () => {
@@ -63,19 +66,28 @@ const TimeTracker: React.FC = () => {
   // Calculate week display string
   const weekRangeDisplay = `${format(weekStart, 'MMM d')} - ${format(weekEnd, 'MMM d, yyyy')}`;
 
+  // Handle save timesheet
+  const handleSaveTimesheet = () => {
+    // In a real app, this would send data to a backend
+    toast({
+      title: "Timesheet Saved",
+      description: `Your time entries for ${weekRangeDisplay} have been saved.`,
+    });
+  };
+
   return (
     <Card className="w-full">
       <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle>Weekly Time Tracker</CardTitle>
         <div className="flex items-center space-x-2">
-          <Button variant="outline" size="icon" onClick={previousWeek}>
+          <Button variant="outline" size="icon" onClick={previousWeek} aria-label="Previous week">
             <ChevronLeft className="h-4 w-4" />
           </Button>
           <div className="flex items-center bg-muted px-3 py-1 rounded-md">
             <Calendar className="h-4 w-4 mr-2 text-muted-foreground" />
             <span className="text-sm">{weekRangeDisplay}</span>
           </div>
-          <Button variant="outline" size="icon" onClick={nextWeek}>
+          <Button variant="outline" size="icon" onClick={nextWeek} aria-label="Next week">
             <ChevronRight className="h-4 w-4" />
           </Button>
         </div>
@@ -106,7 +118,15 @@ const TimeTracker: React.FC = () => {
                 
                 return (
                   <TableRow key={project.id}>
-                    <TableCell className="font-medium">{project.name}</TableCell>
+                    <TableCell>
+                      <div className="flex items-center">
+                        <div 
+                          className="w-3 h-3 rounded-full mr-2" 
+                          style={{ backgroundColor: project.color }}
+                        />
+                        <span className="font-medium">{project.name}</span>
+                      </div>
+                    </TableCell>
                     {weekDays.map((day) => {
                       const dateKey = format(day, 'yyyy-MM-dd');
                       return (
@@ -159,6 +179,12 @@ const TimeTracker: React.FC = () => {
           </Table>
         </div>
       </CardContent>
+      <CardFooter className="flex justify-end">
+        <Button onClick={handleSaveTimesheet}>
+          <Save className="h-4 w-4 mr-2" />
+          Save Timesheet
+        </Button>
+      </CardFooter>
     </Card>
   );
 };
